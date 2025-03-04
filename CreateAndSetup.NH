@@ -1,5 +1,7 @@
 #!/bin/sh
-~/CAM_6_4_025_20240829/cime/scripts/create_newcase --compset FADIAB --res ne30_ne30_mg16 --pecount 128 --case ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid --run-unsupported --project UMIC0104
+CESM_NH_DIR=/glade/derecho/scratch/nforcone/StormSPEED
+
+$CESM_NH_DIR/cime/scripts/create_newcase --compset FADIAB --res ne30_ne30_mg16 --pecount 128 --case ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid --run-unsupported --project UMIC0104
 cd ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid
 
 ./xmlchange CAM_TARGET=theta-l
