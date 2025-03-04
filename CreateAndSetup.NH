@@ -1,0 +1,17 @@
+#!/bin/sh
+~/CAM_6_4_025_20240829/cime/scripts/create_newcase --compset FADIAB --res ne30_ne30_mg16 --compiler intel --driver mct --pecount 128 --case ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid --run-unsupported --project UMIC0104
+cd ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid
+
+./xmlchange CAM_TARGET=theta-l
+./xmlchange DOUT_S=FALSE
+./xmlchange STOP_OPTION=ndays,STOP_N=6
+./xmlquery CAM_CONFIG_OPTS
+./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val "--phys adiabatic --analytic_ic"
+./xmlquery CAM_CONFIG_OPTS
+./xmlchange JOB_WALLCLOCK_TIME=01:00:00
+./pelayout
+./case.setup
+
+cp /glade/u/home/cjablono/CAM_Jan22_cases/project_2_source_code/acid_test.F90 ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid/SourceMods/src.cam/ic_baro_dry_jw06.F90
+
+cp /glade/u/home/cjablono/CAM_Jan22_cases/CAM_Jan22.SEne30.L30_400m.fadiab.acid/user_nl_cam ~/CAM_6_4_025_20240829_cases/CAM_6_4_025_20240829_SEne30_NH_L30_400m_fadiab_acid
